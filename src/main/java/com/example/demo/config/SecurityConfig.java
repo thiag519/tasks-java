@@ -21,7 +21,7 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable()) // desativa CSRF (API REST)
       .authorizeHttpRequests(auth -> auth
         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-        .requestMatchers(HttpMethod.GET, "/tasks/**").permitAll()
+        .requestMatchers(HttpMethod.GET, "/tasks").permitAll()
         .requestMatchers(HttpMethod.POST, "/tasks/**").permitAll()
         .requestMatchers(HttpMethod.DELETE, "/tasks/**").permitAll()
         .requestMatchers(HttpMethod.PATCH, "/tasks/**").permitAll()
