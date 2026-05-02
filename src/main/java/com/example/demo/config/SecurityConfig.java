@@ -20,16 +20,10 @@ public class SecurityConfig {
       .cors(org.springframework.security.config.Customizer.withDefaults())// ativa CORS
       .csrf(csrf -> csrf.disable()) // desativa CSRF (API REST)
       .authorizeHttpRequests(auth -> auth
-        // 🔥 libera TUDO relacionado a tasks
-      .requestMatchers("/tasks").permitAll()
-      .requestMatchers("/tasks/").permitAll()
+    
       .requestMatchers("/tasks/**").permitAll()
-
-      // 🔥 libera preflight
       .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-      // 🔥 (TESTE) libera tudo temporariamente
-      .anyRequest().permitAll()
+      .anyRequest().authenticated()
       );
 
     return http.build();
@@ -42,7 +36,7 @@ public class SecurityConfig {
     configuration.setAllowedOriginPatterns(Arrays.asList("*"));
 
     configuration.setAllowedMethods(Arrays.asList(
-      "GET", "POST", "PUT", "DELETE", "OPTIONS"
+      "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"
     ));
     configuration.setAllowedHeaders(Arrays.asList("*"));
 
